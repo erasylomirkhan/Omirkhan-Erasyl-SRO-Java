@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class ChatAnalyzer {
+    public static void main(String[] args) {
+
+        // Мысал хабарламалар (user: message)
+        List<String> messages = Arrays.asList(
+                "user1: hello world",
+                "user2: hello",
+                "user1: java code",
+                "user3: hello java",
+                "user2: world"
+        );
+
+        // user -> сообщение саны
+        HashMap<String, Integer> userCount = new HashMap<>();
+
+        // word -> жиілік
+        HashMap<String, Integer> wordCount = new HashMap<>();
+
+        for (String msg : messages) {
+            String[] parts = msg.split(":");
+            String user = parts[0].trim();
+            String text = parts[1].trim();
+
+            // Қолданушы санау
+            userCount.put(user, userCount.getOrDefault(user, 0) + 1);
+
+            // Сөздер санау
+            String[] words = text.split(" ");
+            for (String word : words) {
+                wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        // Нәтиже
+        System.out.println("Қолданушылар статистикасы:");
+        for (String user : userCount.keySet()) {
+            System.out.println(user + " -> " + userCount.get(user));
+        }
+
+        System.out.println("\nСөздер жиілігі:");
+        for (String word : wordCount.keySet()) {
+            System.out.println(word + " -> " + wordCount.get(word));
+        }
+    }
+}
